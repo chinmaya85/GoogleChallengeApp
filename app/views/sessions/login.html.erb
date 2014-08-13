@@ -1,0 +1,70 @@
+<script type="text/javascript">
+	function Validate()
+	{
+		
+		if($("#user_id").val() == '' && $("#password").val() == '')
+		{
+			alert("Please enter username and password");
+			return false;
+		}
+		else if($("#user_id").val() == '' )
+		{
+			alert("Please enter username");
+			return false;
+		}
+		else if($("#password").val() == '' )
+		{
+			alert("Please enter password");
+			return false;
+		}
+
+
+	}
+</script>
+<%= form_tag('sessions/create') do -%>
+
+<div class="container">
+  <div class="row">
+
+    <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+
+      <h3>Please Log In, or <%= link_to 'Sign up', :controller => "users", :action => "new" %></h3>
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          
+          <%= link_to "Github", "/auth/github", id: "sign_in", class: "btn btn-lg btn-primary btn-block" %> 
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <%= link_to "Google", "/auth/google_oauth2", id: "sign_in", class: "btn btn-lg btn-info btn-block" %>
+        </div>
+      </div>
+      <div class="login-or">
+        <hr class="hr-or">
+        <span class="span-or">or</span>
+      </div>
+
+      <form role="form">
+        <div class="form-group">
+          <label for="inputUsernameEmail">Username</label>
+          <%= text_field_tag :user_id, params[:user_id], class: "form-control", placeholder: "username" %>
+          
+        </div>
+        <div class="form-group">
+          <a class="pull-right" href="#">Forgot password?</a>
+          <label for="inputPassword">Password</label>
+          <input id="password" type="password" class="form-control" name="password" placeholder="password">
+        </div>
+        <div class="checkbox pull-right">
+          <label>
+            <input type="checkbox">
+            Remember me </label>
+        </div>
+        <%= submit_tag 'Login', class:"btn btn-success", :onclick => "return Validate();"  %>
+        </button>
+      </form>
+    
+    </div>
+    
+  </div>
+</div>
+<% end -%>
